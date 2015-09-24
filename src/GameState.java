@@ -25,10 +25,27 @@ public class GameState {
 		spaces_filled=0;
 		}
 	
-	public Space Winner(Space Player,move m){
+	public static boolean Winner(move m,GameState G){
+		boolean win=false;
+		int counter_v=0;
+		for(int i=1;i<4;i++){
+			if (m.x-i<0){
+				break;
+			}
+			else if (G.board[m.x-i][m.y]==G.Player_turn){
+				counter_v++;
+				
+			}
+			else{
+				break;
+			}
+		}
+		if (counter_v==4){
+			win=true;
+		}
+		return win;
 		
 		
-		return Space.BLUE;
 	}
 	public void UpdateState(move m){
 		board[m.x][m.y]=Player_turn;
