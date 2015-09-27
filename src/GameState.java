@@ -28,6 +28,7 @@ public class GameState {
 	public static boolean Winner(move m,GameState G){
 		boolean win=false;
 		int counter_v=0;
+		int counter_h=0;
 		for(int i=1;i<4;i++){
 			if (m.x-i<0){
 				break;
@@ -40,7 +41,7 @@ public class GameState {
 				break;
 			}
 		}
-		if (counter_v==4){
+		if (counter_v==3){
 			win=true;
 		}
 		return win;
