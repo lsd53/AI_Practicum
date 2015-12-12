@@ -1,7 +1,5 @@
 import java.util.ArrayList;
 import java.util.HashMap;
-import com.larvalabs.megamap.MegaMapManager;
-import com.larvalabs.megamap.MegaMap;
 
 
 
@@ -26,8 +24,10 @@ public class GameState {
 	
 	public static boolean Winner(move m,GameState G){
 		boolean win=false;
-		int counter_v=0;
-		int counter_h=0;
+		int counter_v= 0;
+		int counter_h = 0;
+		int counter_d1 = 0;
+		int counter_d2 = 0;
 		for(int i=1;i<4;i++){
 			if (m.x-i<0){
 				break;
@@ -65,10 +65,60 @@ public class GameState {
 				break;
 			}
 		}
+		for(int j=1;j<4;j++){
+			if (m.y-j<0||m.x-j<0){
+				break;
+			}
+			else if (G.board[m.x-j][m.y-j]==G.Player_turn){
+				counter_d1++;
+				
+			}
+			else{
+				break;
+			}
+		}
+		for(int j=1;j<4;j++){
+			if (6<m.y+j||5<m.x+j){
+				break;
+			}
+			else if (G.board[m.x+j][m.y+j]==G.Player_turn){
+				counter_d1++;
+				
+			}
+			else{
+				break;
+			}
+		}
+		
+		for(int j=1;j<4;j++){
+			if (5<m.x+j||m.y-j<0){
+				break;
+			}
+			else if (G.board[m.x+j][m.y-j]==G.Player_turn){
+				counter_d2++;
+				
+			}
+			else{
+				break;
+			}
+		}
+		for(int j=1;j<4;j++){
+			if (m.x-j<0||6<m.y+j){
+				break;
+			}
+			else if (G.board[m.x-j][m.y+j]==G.Player_turn){
+				counter_d2++;
+				
+			}
+			else{
+				break;
+			}
+		}
+	
 		
 		
 		
-		if (counter_v==3||counter_h==3){
+		if (counter_v==3||counter_h==3||counter_d1==3||counter_d2==3){
 			win=true;
 		}
 		return win;
@@ -122,20 +172,10 @@ public class GameState {
 	}
 	
 	
-	 public class move{
-		int x; int y;
-		public move(int i, int j){
-			x=i;
-			y=j;
-		
-			
-		}
-		public String toString(){
-			return "("+Integer.toString(x)+","+Integer.toString(y)+")";
-		}
+
 		
 		
-	}
+	
 	 
 	public String toString(){
 		String s="";

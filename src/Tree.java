@@ -22,8 +22,8 @@ public class Tree {
 			
 		}
 		else{
-			ArrayList<GameState.move> possib=n.data.PossibleMoves();
-			for(GameState.move m:possib){
+			ArrayList<move> possib=n.data.PossibleMoves();
+			for(move m:possib){
 				Node G=new Node(GameState.UpdateStateRet(m, n.data),n,n.depth+1);
 				n.AddChild(G);
 				AllPossibleStates(G,dep);
