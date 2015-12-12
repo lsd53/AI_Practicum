@@ -1,8 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
+import com.larvalabs.megamap.MegaMapManager;
+import com.larvalabs.megamap.MegaMap;
 
 
 
@@ -41,7 +40,35 @@ public class GameState {
 				break;
 			}
 		}
-		if (counter_v==3){
+		
+		for(int j=1;j<4;j++){
+			if (6<m.y+j){
+				break;
+			}
+			else if (G.board[m.x][m.y+j]==G.Player_turn){
+				counter_h++;
+				
+			}
+			else{
+				break;
+			}
+		}
+		for(int j=1;j<4;j++){
+			if (m.y-j<0){
+				break;
+			}
+			else if (G.board[m.x][m.y-j]==G.Player_turn){
+				counter_h++;
+				
+			}
+			else{
+				break;
+			}
+		}
+		
+		
+		
+		if (counter_v==3||counter_h==3){
 			win=true;
 		}
 		return win;
@@ -50,6 +77,9 @@ public class GameState {
 	}
 	public void UpdateState(move m){
 		board[m.x][m.y]=Player_turn;
+		if (GameState.Winner(m, this)){
+			winner=Player_turn;
+		}
 		if (Player_turn == Space.RED){
 			Player_turn=Space.BLUE;
 		}
@@ -74,6 +104,7 @@ public class GameState {
 	
 	public ArrayList<move> PossibleMoves(){
 		ArrayList<move> possible_moves=new ArrayList<move>();
+		if (winner==null){
 		for (int j=0;j<7;j++){
 			if (board[5][j]==Space.EMPTY){
 				int x=5;
@@ -85,6 +116,7 @@ public class GameState {
 				move m=new move(x,j);
 				possible_moves.add(m);
 				}
+		}
 		}
 		return possible_moves;
 	}
@@ -135,51 +167,7 @@ public class GameState {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		//Tree GameSpace=new Tree(G);
-		GameHash.GameStateHash=new HashMap<GameState,GameState>();
-		
-		int games_played=0;
-		//long startTime = System.nanoTime();
-		while (games_played<1){
-			GameState G=new GameState(Space.RED);
-			while(true){
-				
-			System.out.println(G.toString());
-			try {
-				TimeUnit.MILLISECONDS.sleep(500);
-			} catch (InterruptedException e) {
-				 
-				e.printStackTrace();
-			}
-			ArrayList<move> possib=G.PossibleMoves();
-			if (possib.size()==0){
-				games_played++;
-				break;
-			}
-			else{
-			int i=0 + (int)(Math.random() * ((possib.size()-1 - 0) + 1));
-			GameHash.GameStateHash.put(GameState.UpdateStateRet(possib.get(i), G),GameState.UpdateStateRet(possib.get(i), G));
-			G.UpdateState(possib.get(i));
-			
-			}
-			}
-			System.out.println(Integer.toString(games_played));
-		}
-		for(GameState Gh:GameHash.GameStateHash.keySet()){
-			System.out.println(Gh.toString());
-			System.out.println(GameHash.GameStateHash.keySet().size());
-		}
-		
-		
-		//long endTime = System.nanoTime();
-		//System.out.println(Long.toString((endTime-startTime)/1000000));
-		
-		//long startTime = System.nanoTime();
-		//GameSpace.AllPossibleStates(GameSpace.root, 3);
-		//long endTime = System.nanoTime();
-		//Tree.PrintTree(GameSpace.root);
-		//System.out.println(Integer.toString(Tree.Size(GameSpace.root)));
-		//System.out.println(Long.toString((endTime-startTime)/1000000));
+	
 
 	}
 }
