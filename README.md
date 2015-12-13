@@ -1,3 +1,3 @@
 # AI_Practicum
-<h1> Implementation of AI player for Connect 4</h1>
-<p>This project is the culiminating project for CS4701, Practicum of Artificial Intelligence.</p>
+<h1> Command Line implementation of Connect 4 along with an AI</h1>
+<p>To run, compile in the src folder with javac Game.java and run as java Game</p>
