@@ -29,8 +29,8 @@ public class Game {
 			move m2 = this.two.getMove(gameBoard);
 			boolean winnerP2 = GameState.Winner(m2, gameBoard);
 			gameBoard.UpdateState(m2);
-			System.out.println(gameBoard.toString());
 			if (winnerP2){
+				System.out.println(gameBoard.toString());
 				System.out.println("Player Two won!");
 				break;
 			}
@@ -42,7 +42,7 @@ public class Game {
 	
 	public static void main(String[] args) {
 		Player one = new HumanPlayer();
-		Player two = new HumanPlayer();
+		Player two = new aiBot();
 		
 		Game connectFour = new Game(one,two);
 		connectFour.playGame();
