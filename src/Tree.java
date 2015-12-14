@@ -50,6 +50,8 @@ public class Tree {
         public Node parent;
         public List<Node> children;
         int depth;
+        double nVisits = 0;
+        double totValue = 0;
         
         public Node(GameState datum,Node paren,int d){
         	data=datum;
