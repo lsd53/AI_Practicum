@@ -116,7 +116,6 @@ public class GameState {
 		}
 	
 		
-		System.out.println(Integer.toString(counter_d2));
 		
 		if (counter_v>=3||counter_h>=3||counter_d1>=3||counter_d2>=3){
 			win=true;
