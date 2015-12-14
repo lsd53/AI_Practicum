@@ -15,7 +15,7 @@ public class Game {
 		
 		}
 		
-	public void playGame(){
+	public int playGame(){
 		while (true){
 			System.out.println(gameBoard.toString());
 			move m1 = this.one.getMove(gameBoard);
@@ -24,7 +24,8 @@ public class Game {
 			System.out.println(gameBoard.toString());
 			if (winnerP1){
 				System.out.println("Player One won!");
-				break;
+				return 1;
+				
 			}
 			move m2 = this.two.getMove(gameBoard);
 			boolean winnerP2 = GameState.Winner(m2, gameBoard);
@@ -32,7 +33,8 @@ public class Game {
 			if (winnerP2){
 				System.out.println(gameBoard.toString());
 				System.out.println("Player Two won!");
-				break;
+				return 2;
+				
 			}
 		}
 		
@@ -41,12 +43,10 @@ public class Game {
 	
 	
 	public static void main(String[] args) {
-		Player one = new HumanPlayer();
-		Player two = new aiBot();
-		
-		Game connectFour = new Game(one,two);
-		connectFour.playGame();
-
+		Player one = new aiBot(1000);
+		Player two = new HumanPlayer();
+		Game g = new Game(one,two);
+		g.playGame();
 	}
 	
 

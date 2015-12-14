@@ -1,10 +1,15 @@
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.ThreadLocalRandom;
 
 
 public class aiBot extends Player{
-
+	int plays;
+	
+	public aiBot(int n){
+		plays =n;
+	}
 	@Override
 	move getMove(GameState g) {
 		System.out.println("AI bot is thinking....");
@@ -16,18 +21,19 @@ public class aiBot extends Player{
 				return m;
 			}
 			else{
-				winPercents.add(playout(g,m,18000));
+				winPercents.add(playout(g,m,plays));
 				
 			}
 			
 			
 		}
 		int maxIDX = winPercents.indexOf(Collections.max(winPercents));
+		DecimalFormat df = new DecimalFormat("#.####");
 		String s="";
 		for(int i = 0; i<winPercents.size();i++){
-			s = s+Double.toString(winPercents.get(i))+" ";
+			s = s+df.format(winPercents.get(i))+" ";
 		}
-		System.out.println("Move win percents: "+s);
+		//System.out.println("Move win percents: "+s);
 		System.out.println("AI plays: "+moves.get(maxIDX).toString());
 		return moves.get(maxIDX);
 	}
