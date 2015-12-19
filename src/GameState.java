@@ -137,9 +137,15 @@ public class GameState {
 			
 		}
 		spaces_filled++;
+		if (this.spaces_filled >=42){
+			this.winner= GameState.Space.EMPTY;
+		}
+
+		
 	}
 	public  static GameState  UpdateStateRet(move m,GameState G){
-		GameState G_updated=new GameState(G.Player_turn);
+		GameState G_updated=new GameState(Space.RED);
+		G_updated.Player_turn= G.Player_turn;
 		for(int i=0;i<6;i++){
 			for(int j=0;j<7;j++){
 				G_updated.board[i][j]=G.board[i][j];
@@ -148,6 +154,20 @@ public class GameState {
 		G_updated.spaces_filled=G.spaces_filled;
 		G_updated.UpdateState(m);
 		return G_updated;
+	}
+	public static GameState GameStateCopy(GameState G){
+			GameState G_updated=new GameState(Space.RED);
+			G_updated.Player_turn= G.Player_turn;
+			for(int i=0;i<6;i++){
+				for(int j=0;j<7;j++){
+					G_updated.board[i][j]=G.board[i][j];
+					}
+				}
+			G_updated.spaces_filled=G.spaces_filled;
+			G_updated.winner = G.winner; 
+			
+		return G_updated;
+		
 	}
 	
 	

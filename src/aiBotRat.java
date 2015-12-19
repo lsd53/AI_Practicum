@@ -4,10 +4,10 @@ import java.util.Collections;
 import java.util.concurrent.ThreadLocalRandom;
 
 
-public class aiBot extends Player{
+public class aiBotRat extends Player{
 	int plays;
 	
-	public aiBot(int n){
+	public aiBotRat(int n){
 		plays =n;
 	}
 	@Override
@@ -33,8 +33,8 @@ public class aiBot extends Player{
 		for(int i = 0; i<winPercents.size();i++){
 			s = s+df.format(winPercents.get(i))+" ";
 		}
-		//System.out.println("Move win percents: "+s);
-		//System.out.println("AI plays: "+moves.get(maxIDX).toString());
+		System.out.println("Move win percents: "+s);
+		System.out.println("AI plays: "+moves.get(maxIDX).toString());
 		return moves.get(maxIDX);
 	}
 	public double playout(GameState g, move m,int gamesToPlay){
@@ -57,12 +57,9 @@ public class aiBot extends Player{
 				if (GameState.Winner(mWin, gUpdate)){
 					moveIDX = moves.indexOf(mWin);
 				}
+				
+				
 			}
-			
-			
-			
-			
-			
 			if (GameState.Winner(moves.get(moveIDX),gUpdate)){
 				if (gUpdate.Player_turn == p){
 					wins =wins+1;

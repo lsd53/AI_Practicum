@@ -45,6 +45,9 @@ public class Tree {
 		}
 	}
 	
+	
+	
+	
     public  class Node{
         public GameState data;
         public Node parent;
